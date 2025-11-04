@@ -1,0 +1,61 @@
+═══════════════════════════════════════════════════════════
+  C++ Judge GUI - Quick Build Guide
+═══════════════════════════════════════════════════════════
+
+🎯 GOAL: Build judge_gui.exe for Windows
+
+───────────────────────────────────────────────────────────
+
+📋 PREREQUISITES (macOS)
+- ✓ Flutter SDK installed
+- ✓ mingw-w64 installed (brew install mingw-w64)
+- ✓ p7zip installed (brew install p7zip)
+
+───────────────────────────────────────────────────────────
+
+🚀 OPTION 1: Build Everything (CLI + GUI)
+
+cd /Volumes/PortableSSD/Projects/Python/CPP-Judger-main
+bash scripts/build_complete_bundle.sh
+
+NOTE: This builds CLI on macOS, but GUI needs Windows
+
+───────────────────────────────────────────────────────────
+
+🖥️  OPTION 2: Build GUI on Windows PC
+
+1. Copy cpp_judge folder to Windows PC
+
+2. On Windows, open Command Prompt:
+   cd cpp_judge
+   flutter build windows --release
+
+3. Find output at:
+   build\windows\x64\runner\Release\judge_gui.exe
+
+4. Copy entire Release\ folder to:
+   dist\win64\gui\
+
+───────────────────────────────────────────────────────────
+
+✅ VERIFICATION
+
+After building, you should have:
+
+win64/
+├── judge.exe              (CLI - built on macOS)
+├── gui/
+│   └── judge_gui.exe      (GUI - built on Windows)
+└── mingw64/               (Compiler - bundled)
+
+───────────────────────────────────────────────────────────
+
+🎓 FOR STUDENTS
+
+They can use EITHER:
+1. gui\judge_gui.exe   (Modern, drag-drop, visual)
+2. judge.exe           (Simple, text-based)
+
+Both use the same test cases = fair grading!
+
+═══════════════════════════════════════════════════════════

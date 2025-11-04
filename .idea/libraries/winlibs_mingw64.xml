@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="winlibs-mingw64">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/win64/winlibs-mingw64.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

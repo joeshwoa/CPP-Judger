@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "title": "A. Holiday Of Equality",
+  "timeLimit": "1 second",
+  "memoryLimit": "256 megabytes",
+  "inputFormat": "The first line contains the integer n (1 ≤ n ≤ 100) — the number of citizens in the kingdom.\n\nThe second line contains n integers a₁, a₂, ..., aₙ, where aᵢ (0 ≤ aᵢ ≤ 10⁶) — the welfare of the i-th citizen.",
+  "outputFormat": "In the only line print the integer S — the minimum number of burles which are had to spend.",
+  "notes": "In the first example if we add to the first citizen 4 burles, to the second 3, to the third 2 and to the fourth 1, then the welfare of all citizens will equal 4.\n\nIn the second example it is enough to give one burle to the third citizen.\n\nIn the third example it is necessary to give two burles to the first and the third citizens to make the welfare of citizens equal 3.\n\nIn the fourth example it is possible to give nothing to everyone because all citizens have 12 burles."
+}

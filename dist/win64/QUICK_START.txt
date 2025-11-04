@@ -1,0 +1,83 @@
+╔══════════════════════════════════════════════════════════════╗
+║           JoJudge - C++ Problem Judger                       ║
+║                   Quick Start Guide                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+📌 WHAT IS THIS?
+   An automatic grading tool for C++ programming problems.
+   No installation needed - just run judge.exe!
+
+🎯 PROBLEMS AVAILABLE:
+   
+   Problem 1: Holiday Of Equality
+   • Find minimum cost to equalize citizen welfare
+   • Input: n, then n integers
+   • Output: single integer (minimum cost)
+   
+   Problem 2: Odd Set
+   • Check if numbers can be paired with odd sums
+   • Input: t, then for each test: n and 2n integers
+   • Output: "Yes" or "No" for each test
+   
+   Problem 3: Plus or Minus
+   • Determine if a+b=c or a-b=c
+   • Input: t, then for each test: a, b, c
+   • Output: "+" or "-" for each test
+
+⚡ HOW TO USE:
+
+   1. Write your solution in a .cpp file
+   2. Double-click judge.exe
+   3. Type problem number (1, 2, or 3) and press Enter
+   4. Type full path to your .cpp file, for example:
+      C:\Users\YourName\Desktop\solution.cpp
+   5. Press Enter and wait for results!
+
+✅ WHAT TO EXPECT:
+
+   The judger will:
+   • Compile your code
+   • Run it against multiple test cases
+   • Show which tests passed/failed
+   • If failed, show your output vs expected output
+
+💡 TIPS:
+
+   ✓ Save your file before running the judger
+   ✓ Use the exact file path (copy-paste recommended)
+   ✓ Check output format carefully (spaces, newlines)
+   ✓ Read problem description for input/output format
+
+⚠️ COMMON MISTAKES:
+
+   ✗ Wrong file path → "File not found"
+   ✗ Syntax errors → "Compilation failed"  
+   ✗ Wrong output format → Tests fail
+   ✗ Missing endl or \n → Output comparison fails
+
+📁 FILES IN THIS FOLDER:
+
+   judge.exe           - The judger (run this!)
+   mingw64/            - C++ compiler (used automatically)
+   *.dll               - Required libraries
+   README.txt          - Detailed instructions
+   QUICK_START.txt     - This file
+
+🔧 NEED HELP?
+
+   If compilation fails:
+   → Check compile_errors.txt in this folder
+   
+   If tests fail:
+   → Compare "Your Output" with "Expected Output"
+   → Check for extra/missing spaces or newlines
+   
+   If nothing works:
+   → Make sure all files are in the same folder
+   → Try running from Command Prompt for error details
+
+═══════════════════════════════════════════════════════════════
+
+              Ready to test? Run judge.exe now!
+
+═══════════════════════════════════════════════════════════════

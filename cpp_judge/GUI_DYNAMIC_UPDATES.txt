@@ -1,0 +1,191 @@
+═══════════════════════════════════════════════════════════
+  GUI Dynamic Problems - Code Updates Needed
+═══════════════════════════════════════════════════════════
+
+To make the GUI load problems dynamically, update judge_screen.dart:
+
+───────────────────────────────────────────────────────────
+
+1. ADD IMPORTS (at top of file, after existing imports):
+
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../services/problem_loader.dart';
+
+───────────────────────────────────────────────────────────
+
+2. ADD STATE VARIABLES (in _JudgeScreenState class):
+
+List<Problem> _availableProblems = [];
+bool _isLoadingProblems = true;
+
+───────────────────────────────────────────────────────────
+
+3. UPDATE initState METHOD:
+
+@override
+void initState() {
+  super.initState();
+  _tabController = TabController(length: 3, vsync: this);
+  _codeController = CodeController(
+    text: _getStarterCode(),
+    language: cpp,
+  );
+  _loadProblems();  // ← ADD THIS
+}
+
+───────────────────────────────────────────────────────────
+
+4. ADD _loadProblems METHOD (after initState):
+
+Future<void> _loadProblems() async {
+  final problems = await ProblemLoader.loadAllProblems();
+  setState(() {
+    _availableProblems = problems;
+    _isLoadingProblems = false;
+    if (problems.isNotEmpty) {
+      _selectedProblemId = problems.first.id;
+      _currentProblem = problems.first;
+    }
+  });
+}
+
+───────────────────────────────────────────────────────────
+
+5. UPDATE _buildProblemSelector METHOD:
+
+Widget _buildProblemSelector() {
+  if (_isLoadingProblems) {
+    return const CircularProgressIndicator();
+  }
+  
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 12),
+    decoration: BoxDecoration(
+      color: Theme.of(context).colorScheme.primaryContainer,
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: DropdownButton<int>(
+      value: _selectedProblemId,
+      underline: const SizedBox(),
+      items: _availableProblems.map((problem) {
+        return DropdownMenuItem(
+          value: problem.id,
+          child: Text(
+            problem.title,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        );
+      }).toList(),
+      onChanged: (value) {
+        if (value != null) {
+          setState(() {
+            _selectedProblemId = value;
+            _currentProblem = _availableProblems
+                .firstWhere((p) => p.id == value);
+            _judgeResult = null;
+          });
+        }
+      },
+    ),
+  );
+}
+
+───────────────────────────────────────────────────────────
+
+6. UPDATE _buildProblemView METHOD (add PDF support at start):
+
+Widget _buildProblemView() {
+  if (_currentProblem == null) {
+    return const Center(child: Text('Problem not found'));
+  }
+
+  // ← ADD THIS: Show PDF if available
+  if (_currentProblem!.pdfPath != null) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Text(
+                _currentProblem!.title,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const Spacer(),
+              TextButton.icon(
+                onPressed: () {
+                  setState(() {
+                    _currentProblem = _currentProblem!.copyWith(
+                      pdfPath: null
+                    );
+                  });
+                },
+                icon: const Icon(Icons.article),
+                label: const Text('Show Text Version'),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: SfPdfViewer.file(
+            File(_currentProblem!.pdfPath!),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Rest of existing code for text display...
+  return SingleChildScrollView(
+    // ... existing text-based problem display
+  );
+}
+
+───────────────────────────────────────────────────────────
+
+7. ADD copyWith METHOD to Problem class (in problem.dart):
+
+Problem copyWith({
+  int? id,
+  String? title,
+  String? timeLimit,
+  String? memoryLimit,
+  String? description,
+  String? inputFormat,
+  String? outputFormat,
+  List<Example>? examples,
+  String? notes,
+  String? pdfPath,
+}) {
+  return Problem(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    timeLimit: timeLimit ?? this.timeLimit,
+    memoryLimit: memoryLimit ?? this.memoryLimit,
+    description: description ?? this.description,
+    inputFormat: inputFormat ?? this.inputFormat,
+    outputFormat: outputFormat ?? this.outputFormat,
+    examples: examples ?? this.examples,
+    notes: notes ?? this.notes,
+    pdfPath: pdfPath,  // Allow null to toggle PDF off
+  );
+}
+
+───────────────────────────────────────────────────────────
+
+SUMMARY:
+1. ✓ Dependencies added (pubspec.yaml)
+2. ✓ problem_loader.dart created
+3. ✓ judge_service.dart updated  
+4. → judge_screen.dart needs above updates
+5. → problem.dart needs copyWith method
+
+After making these changes:
+- flutter pub get
+- flutter build windows --release
+- Copy build to dist/win64/gui/
+
+═══════════════════════════════════════════════════════════

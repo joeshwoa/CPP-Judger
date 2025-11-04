@@ -1,0 +1,9 @@
+{
+  "id": 3,
+  "title": "A. Plus or Minus",
+  "timeLimit": "1 second",
+  "memoryLimit": "256 megabytes",
+  "inputFormat": "The first line contains a single integer t (1≤t≤162) — the number of test cases.\n\nThe description of each test case consists of three integers a, b, c (1≤a,b≤9, −8≤c≤18). The additional constraint on the input: it will be generated so that exactly one of the two equations will be true.",
+  "outputFormat": "For each test case, output either + or - on a new line, representing the correct equation.",
+  "notes": "In the first test case, 1+2=3.\n\nIn the second test case, 3−2=1.\n\nIn the third test case, 2−9=−7. Note that c can be negative."
+}
